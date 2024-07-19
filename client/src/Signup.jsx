@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 const Signup = () => {
     const [name, setName] = useState('');
@@ -10,6 +11,7 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const [prevData, setPrevData] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const validateInputs = () => {
@@ -69,45 +71,73 @@ const Signup = () => {
                         <label htmlFor="name">
                             <strong>Name</strong>
                         </label>
-                        <input
-                            type="text"
-                            placeholder="Enter name"
-                            name="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="rounded-sm cursor-pointer px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                        />
+                        <div className='relative'>
+                            <input
+                                type="text"
+                                placeholder="Enter name"
+                                name="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="rounded-sm cursor-pointer px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                                required
+                            />
+                            <span className='absolute inset-y-0 right-0 flex items-center px-3'>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/hrjifpbq.json"
+                                    trigger="hover"
+                                    style={{ width: '24px', height: '24px' }}>
+                                </lord-icon>
+                            </span>
+                        </div>
                         {errors.name && <span className="text-red-500 text-xs mt-1">{errors.name}</span>}
                     </div>
                     <div className="mb-3 flex flex-col">
                         <label htmlFor="email">
                             <strong>Email</strong>
                         </label>
-                        <input
-                            type="email"
-                            placeholder="Enter email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="rounded-sm px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                        />
+                        <div className='relative'>
+                            <input
+                                type="email"
+                                placeholder="Enter email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="rounded-sm px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                                required
+                            />
+                            <span className='absolute inset-y-0 right-0 flex items-center px-3'>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/slmechys.json"
+                                    trigger="hover"
+                                    style={{ width: '24px', height: '24px' }}
+                                    >
+                                </lord-icon>
+                            </span>
+                        </div>
                         {errors.email && <span className="text-red-500 text-xs mt-1">{errors.email}</span>}
                     </div>
                     <div className="mb-3 flex flex-col">
                         <label htmlFor="password">
                             <strong>Password</strong>
                         </label>
-                        <input
-                            type="password"
-                            placeholder="Enter password"
-                            name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="rounded-sm px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter password"
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="rounded-sm px-3 py-2 border w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="absolute inset-y-0 right-0 flex items-center px-3 text-2xl"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
+                            </button>
+                        </div>
                         {errors.password && <span className="text-red-500 text-xs mt-1">{errors.password}</span>}
                     </div>
                     <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
